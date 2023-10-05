@@ -33,7 +33,18 @@ final class Fabricante {
     } 
 
 
-
+    public function inserirFabricante():void {
+        $sql = "INSERT INTO fabricantes(nome) VALUES(:nome)";
+    
+        try {
+            $consulta = $this->conexao->prepare($sql);
+            $consulta->bindValue(":nome", $this->nome, PDO::PARAM_STR);
+            $consulta->execute();
+        } catch (Exception $erro) {
+            die("Erro ao inserir: ".$erro->getMessage());
+        }
+    
+    }
 
 
 
