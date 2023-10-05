@@ -29,7 +29,7 @@ $quantidade = count($listaDeFabricantes);
             <h2 style="color:blue">Fabricante atualizado com sucesso!</h2>
         <?php } ?>
         <table>
-            <caption>Lista de Fabricantes: <b><?=$quantidade?></b></caption>
+            <caption>Fabricantes: <b><?=$quantidade?></b></caption>
             <thead>
                 <tr>
                     <th>ID</th>

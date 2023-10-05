@@ -1,11 +1,13 @@
 <?php
-require_once "../src/funcoes-fabricantes.php";
-$id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
-$fabricante = lerUmFabricante($conexao, $id);
+use ExemploCrudPoo\Fabricante;
+require_once "../vendor/autoload.php";
+$fabricante = new Fabricante;
+$fabricante->setId($_GET['id']);
+$dadosFabricante = $fabricante->lerUmFabricante();
 
 if( isset($_POST['atualizar']) ){
-    $nome = filter_input(INPUT_POST, "nome", FILTER_SANITIZE_SPECIAL_CHARS);
-    atualizarFabricante($conexao, $nome, $id);  
+    $fabricante->setNome($_POST['nome']);
+    $fabricante->atualizarFabricante();  
     header("location:visualizar.php?status=sucesso");
 }
 ?>
@@ -22,10 +24,10 @@ if( isset($_POST['atualizar']) ){
         <h1>Fabricantes | SELECT/UPDATE</h1>
         <hr>
         <form action="" method="post">
-            <input type="hidden" name="id" value="<?=$fabricante['id']?>">
+            <input type="hidden" name="id" value="<?=$dadosFabricante['id']?>">
             <p>
                 <label for="nome">Nome:</label>
-                <input value="<?=$fabricante['nome']?>" required type="text" name="nome" id="nome">
+                <input value="<?=$dadosFabricante['nome']?>" required type="text" name="nome" id="nome">
             </p>
             <button type="submit" name="atualizar">
                 Atualizar fabricante</button>
